@@ -14,7 +14,7 @@ void GSIntro::Init()
 {
 	auto model = ResourceManagers::GetInstance()->GetModel("Sprite2D.nfg");
 	auto shader = ResourceManagers::GetInstance()->GetShader("TextureShader");
-	auto texture = ResourceManagers::GetInstance()->GetTexture("MyLogo.tga");
+	auto texture = ResourceManagers::GetInstance()->GetTexture("BG_blue_shop.tga");
 
 	m_logo = std::make_shared<Sprite2D>(model, shader, texture);
 	m_logo->Set2DPosition((float)Globals::screenWidth / 2, (float)Globals::screenHeight / 2);
@@ -24,7 +24,6 @@ void GSIntro::Init()
 void GSIntro::Exit()
 {
 }
-
 
 void GSIntro::Pause()
 {

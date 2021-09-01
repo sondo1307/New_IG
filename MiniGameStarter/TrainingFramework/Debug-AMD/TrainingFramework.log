@@ -1,4 +1,4 @@
-﻿  GSIntro.cpp
-D:\Github\New_IG\New_IG\MiniGameStarter\TrainingFramework\src\GameStates\GSIntro.cpp(20,86): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
-D:\Github\New_IG\New_IG\MiniGameStarter\TrainingFramework\src\GameStates\GSIntro.cpp(20,52): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+﻿  GSMenu.cpp
+  TrainingFramework.cpp
+  Generating Code...
   TrainingFramework.vcxproj -> D:\Github\New_IG\New_IG\MiniGameStarter\\BIN-AMD\TrainingFramework.exe

@@ -25,7 +25,7 @@ void GSMenu::Init()
 	m_background->SetSize(Globals::screenWidth, Globals::screenHeight);
 
 	// play button
-	texture = ResourceManagers::GetInstance()->GetTexture("btn_play.tga");
+	texture = ResourceManagers::GetInstance()->GetTexture("PlayBtn1.tga");
 	std::shared_ptr<GameButton> button = std::make_shared<GameButton>(model, shader, texture);
 	button->Set2DPosition(Globals::screenWidth / 2, Globals::screenHeight / 2);
 	button->SetSize(200, 200);
@@ -35,7 +35,7 @@ void GSMenu::Init()
 	m_listButton.push_back(button);
 
 	//CreditBtn
-	texture = ResourceManagers::GetInstance()->GetTexture("btn_settings.tga");
+	texture = ResourceManagers::GetInstance()->GetTexture("RateBtn.tga");
 	std::shared_ptr<GameButton> setting_btn = std::make_shared<GameButton>(model, shader, texture);
 	setting_btn->Set2DPosition(Globals::screenWidth / 2, Globals::screenHeight / 2 + 200);
 	setting_btn->SetSize(150, 150);
@@ -57,7 +57,7 @@ void GSMenu::Init()
 	// game title
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
 	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("Brightly Crush Shine.otf");
-	m_textGameName = std::make_shared< Text>(shader, font, "Epic Game", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
+	m_textGameName = std::make_shared< Text>(shader, font, "PacPacMan", Vector4(1.0f, 0.5f, 0.0f, 1.0f), 3.0f);
 	m_textGameName->Set2DPosition(Vector2(60, 200));
 }
 

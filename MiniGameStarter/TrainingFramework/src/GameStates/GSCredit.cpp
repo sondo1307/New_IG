@@ -42,7 +42,7 @@ void GSCredit::Init()
 
 	// text
 	shader = ResourceManagers::GetInstance()->GetShader("TextShader");
-	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("Brightly Crush Shine.otf");
+	std::shared_ptr<Font> font = ResourceManagers::GetInstance()->GetFont("arialbd.ttf");
 	m_score = std::make_shared< Text>(shader, font, "Do Tuan Son - PTIT", TextColor::BLACK, 1.0);
 	m_score->Set2DPosition(Globals::screenWidth / 2-100, Globals::screenHeight / 2);
 }
