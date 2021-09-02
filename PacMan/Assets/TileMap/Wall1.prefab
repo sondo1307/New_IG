@@ -85,6 +85,16 @@ Tilemap:
   m_GameObject: {fileID: 9017783752571958306}
   m_Enabled: 1
   m_Tiles:
+  - first: {x: 0, y: -4, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 14
+      m_TileSpriteIndex: 14
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   - first: {x: 3, y: -2, z: 0}
     second:
       serializedVersion: 2
@@ -255,6 +265,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 386af34314f7fe64b971d3569a5078bc, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 0b0388802255da645a99c9297a690529, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 171d3e89c71c88644af18253a5a3b415, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: -4178046375966092550, guid: f5a0669961821114ab810565a130614e, type: 3}
@@ -284,8 +296,10 @@ Tilemap:
     m_Data: {fileID: -2540613011197712258, guid: 23d1aa12e8350ac46932764628ab07ee, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 2601623841602742682, guid: 23d1aa12e8350ac46932764628ab07ee, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 25af16594fd446a44833054d9382a6c3, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 14
+  - m_RefCount: 15
     m_Data:
       e00: 1
       e01: 0
@@ -304,13 +318,13 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 14
+  - m_RefCount: 15
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -3, y: -2, z: 0}
-  m_Size: {x: 9, y: 3, z: 1}
+  m_Origin: {x: -3, y: -4, z: 0}
+  m_Size: {x: 9, y: 5, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -378,7 +392,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &4238502591276212136
+--- !u!114 &1018685195647480211
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
