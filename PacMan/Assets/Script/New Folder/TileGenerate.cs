@@ -31,7 +31,7 @@ public class TileGenerate : MonoBehaviour
                 {
                     if (item.color == a)
                     {
-                        if (item.prefab.name == "Block")
+                        if (item.prefab.name == "Block"|| item.prefab.name == "BlockInvis")
                         {
                             Instantiate(item.prefab, new Vector3(x1, y1, 0), Quaternion.identity, blockParent);
                         }

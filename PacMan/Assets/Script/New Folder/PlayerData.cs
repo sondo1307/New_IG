@@ -25,8 +25,12 @@ public class PlayerData : MonoBehaviour
         Debug.Log(2);
     }
 
-    public void KillPlayer()
+    public IEnumerator KillPlayer()
     {
+        Instantiate(MySceneManager.Instance.deadParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        yield return new WaitForSeconds(2);
+        Time.timeScale = 0;
+        //Call UI GameOver
     }
 }

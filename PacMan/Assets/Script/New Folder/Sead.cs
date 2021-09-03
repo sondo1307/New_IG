@@ -25,7 +25,7 @@ public class Sead : MonoBehaviour
             //    StartCoroutine(collision.GetComponentInParent<PlayerData>().PowerUp());
             //}
             StartCoroutine(collision.GetComponentInParent<PlayerData>().PowerUp());
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

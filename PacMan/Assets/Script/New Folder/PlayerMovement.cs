@@ -27,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         pointVector = aheadPoint.position - transform.position;
-        //AheadCheck();
-        Debug.DrawRay(transform.position, aheadPoint.position - transform.position, Color.red);
     }
 
     private void FixedUpdate()
@@ -105,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!AheadCheck())
         {
-            rb.velocity = (AheadPoint.position - transform.position).normalized * 0.5f * moveSpeed;
+            rb.velocity = (AheadPoint.position - transform.position).normalized * moveSpeed;
         }
         else
         {
