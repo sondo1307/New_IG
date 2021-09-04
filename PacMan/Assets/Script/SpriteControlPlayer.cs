@@ -32,9 +32,9 @@ public class SpriteControlPlayer : MonoBehaviour
         {
             collision.GetComponent<PlayerMovement>().allowToTurn90 = false;
         }
-        else if (collision.transform.CompareTag("Enemy"))
-        {
-            collision.GetComponent<EnemyMovement>().allow = true;
-        }
+        //else if (collision.transform.CompareTag("Enemy"))
+        //{
+        //    collision.GetComponent<EnemyMovement>().allow = true;
+        //}
     }
 }

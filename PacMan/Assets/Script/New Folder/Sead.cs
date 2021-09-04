@@ -15,16 +15,7 @@ public class Sead : MonoBehaviour
     {
         if (collision.transform.CompareTag("PlayerSquare"))
         {
-            //if (sead == SeadKind.normal)
-            //{
-            //    collision.GetComponentInParent<PlayerData>().Point++;
-            //}
-            //else if (sead == SeadKind.power)
-            //{
-            //    Debug.Log(0);
-            //    StartCoroutine(collision.GetComponentInParent<PlayerData>().PowerUp());
-            //}
-            StartCoroutine(collision.GetComponentInParent<PlayerData>().PowerUp());
+            MySceneManager.Instance.MinusTotalSead();
             Destroy(gameObject);
         }
     }

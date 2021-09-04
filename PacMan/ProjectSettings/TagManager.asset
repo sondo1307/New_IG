@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerSquare
   - Enemy
+  - Sead
   layers:
   - Default
   - TransparentFX

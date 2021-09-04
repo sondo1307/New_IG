@@ -7,12 +7,13 @@ public class MySceneManager : MonoBehaviour
     public static MySceneManager Instance;
     public bool begin;
     public bool allowPlayerToInput;
-
+    public int totalSead { get; set; }
 
     [Header("Particle")]
-    public GameObject deadParticle;
+    public GameObject bonusScore;
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         Instance = this;
         begin = false;
         allowPlayerToInput = false;
@@ -23,6 +24,7 @@ public class MySceneManager : MonoBehaviour
     private void Start()
     {
         l = FindObjectsOfType<EnemyMovement>();
+        totalSead = FindObjectsOfType<Sead>().Length;
     }
 
     private void Update()
@@ -43,8 +45,21 @@ public class MySceneManager : MonoBehaviour
         for (int i = 0; i < l.Length; i++)
         {
             l[i].enabled = true;
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
+        }
+    }
+        
+    public void MinusTotalSead()
+    {
+        totalSead--;
+        if (totalSead == 0)
+        {
+            Time.timeScale = 0;
+            begin = false;
+            InGameUI.Instance.ShowUIWin();
         }
     }
 
 }
+
+

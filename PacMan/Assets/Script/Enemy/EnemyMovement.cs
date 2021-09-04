@@ -8,16 +8,24 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask turnLayer;
     [SerializeField] private LayerMask playerLayer;
-    private List<Vector3> dirNoHitWall;
+    public List<Vector3> dirNoHitWall;
     private Rigidbody2D rb;
     [SerializeField] protected Transform aheadPoint;
     [SerializeField] private float moveSpeed;
 
     public Vector3 nextTurnPos;
     public Vector3 lastTurnPos;
-    public bool allow;
+    public bool allow { get; set; }
     protected Animator animator;
     private SpriteRenderer spriteRenderer;
+    bool oneTime;
+    private enum State
+    {
+        Wander,
+        Chase,
+    };
+
+    [SerializeField] private State state;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,44 +36,53 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnEnable()
     {
-
         allow = true;
         Sequence s = DOTween.Sequence();
-
-        s.Append(transform.DOMove(new Vector3(11.5f, 11.5f, 0), 0.5f).SetEase(Ease.Linear))
-            .Append(transform.DOMoveY(13.5f, 1f).SetEase(Ease.Linear).OnComplete(DecideToMove));
+        s.Append(transform.DOMove(new Vector3(11.5f, 11.5f, 0), 0.25f).SetEase(Ease.Linear))
+            .Append(transform.DOMoveY(13.5f, 0.5f).SetEase(Ease.Linear).OnComplete(DecideToMove));
     }
 
     private void Start()
     {
+        oneTime = true;
     }
 
     private void FixedUpdate()
     {
-        TurnCheck();
+        if (state == State.Wander)
+        {
+            TurnCheck();
+        }
         CheckPlayerAhead();
     }
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, nextTurnPos) <= 0.05f && Vector3.Distance(transform.position, nextTurnPos) > 0)
+        if (Vector3.Distance(transform.position, nextTurnPos) <= 0.15f && Vector3.Distance(transform.position, nextTurnPos) > 0
+            && state == State.Wander && oneTime)
         {
+            Debug.Log(Vector3.Distance(transform.position, nextTurnPos));
+
             transform.position = nextTurnPos;
             allow = false;
             DecideToMove();
             lastTurnPos = transform.position;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(ReturnToBase());
-        }
-
     }
 
     private void LateUpdate()
     {
-        rb.velocity = (aheadPoint.position - transform.position).normalized * moveSpeed;
+        if (MySceneManager.Instance.begin)
+        {
+            rb.velocity = (aheadPoint.position - transform.position).normalized * moveSpeed;
+        }
+        else
+        {
+            animator.speed = 0;
+            transform.GetChild(0).transform.localPosition = Vector3.zero;
+            rb.velocity = Vector2.zero;
+        }
     }
 
     private void ScanFourDir()
@@ -125,7 +142,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    bool oneTime;
     private void DecideToMove()
     {
         dirNoHitWall.Clear();
@@ -148,16 +164,18 @@ public class EnemyMovement : MonoBehaviour
         {
             animator.SetTrigger("TurnUp");
         }
+        oneTime = false;
     }
 
 
     RaycastHit2D hit;
     private void TurnCheck()
     {
-        hit = Physics2D.Raycast(transform.position, aheadPoint.position - transform.position, 0.55f, turnLayer);
+        hit = Physics2D.Raycast(aheadPoint.position, aheadPoint.position - transform.position, 0.55f, turnLayer);
         if (hit)
         {
             nextTurnPos = hit.collider.transform.position;
+            oneTime = true;
         }
     }
 
@@ -175,7 +193,7 @@ public class EnemyMovement : MonoBehaviour
         {
             animator.SetTrigger("TurnUp");
         }
-        Tween a = transform.DOMove(new Vector3(11.5f, 11.5f, 0), Vector3.Distance(transform.position, new Vector3(11.5f, 11.5f, 0))/8)
+        Tween a = transform.DOMove(new Vector3(11.5f, 11.5f, 0), Vector3.Distance(transform.position, new Vector3(11.5f, 11.5f, 0))/5)
             .SetEase(Ease.Linear)
             .SetUpdate(true);
         yield return a.WaitForCompletion();
@@ -189,13 +207,22 @@ public class EnemyMovement : MonoBehaviour
 
     public void CheckPlayerAhead()
     {
-        if (Physics2D.Raycast(transform.position, aheadPoint.position - transform.position, 4f, playerLayer))
+        RaycastHit2D a = Physics2D.Raycast(transform.position, aheadPoint.position - transform.position, 4f, playerLayer);
+        if (a && a.transform.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             moveSpeed = 4f;
+            state = State.Chase;
         }
         else
         {
             moveSpeed = 3;
+            state = State.Wander;
         }
+    }
+
+    public void StopMove()
+    {
+        aheadPoint.localPosition = Vector3.zero;
+        rb.velocity = Vector2.zero;
     }
 }

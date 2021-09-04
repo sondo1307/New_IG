@@ -13,15 +13,17 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 pointVector;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    public bool allowToMove { get; set; }
 
     public Transform AheadPoint { get => aheadPoint; set => aheadPoint = value; }
 
-
+    public string lastAnimationTrigger { get; set; }
     private void Start()
     {
         allowToTurn90 = false;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        allowToMove = true;
     }
 
     private void Update()
@@ -31,7 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement();
+        if (MySceneManager.Instance.begin && allowToMove)
+        {
+            Movement();
+        }
     }
     public void Movement()
     {
@@ -134,10 +139,12 @@ public class PlayerMovement : MonoBehaviour
         if (aheadPoint.localPosition.x !=0 && aheadPoint.localPosition.y == 0)
         {
             animator.SetTrigger("IdleH");
+            lastAnimationTrigger = "IdleH";
         }
         else if (aheadPoint.localPosition.y != 0 && aheadPoint.localPosition.x == 0)
         {
             animator.SetTrigger("IdleV");
+            lastAnimationTrigger = "IdleV";
         }
     }
 
@@ -156,9 +163,17 @@ public class PlayerMovement : MonoBehaviour
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName(a))
         {
             animator.SetTrigger(a);
+            lastAnimationTrigger = a;
         }
         spriteRenderer.flipX = _flipX;
         spriteRenderer.flipY = _flipY;
+    }
+
+    public IEnumerator TemporaryDisablePlayerMovement()
+    {
+        allowToMove = false;
+        yield return new WaitForSeconds(0.5f);
+        allowToMove = true;
     }
 }
 
