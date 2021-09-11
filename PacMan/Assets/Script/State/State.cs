@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class State<T>
 {
-    private T m_Enity;
+    protected T m_Enity;
     public State(T entity){
         m_Enity = entity;
     }

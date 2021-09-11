@@ -26,5 +26,7 @@ public class Player : Entity
         moveState = new MoveState(this, 10);
 
         stateMachine.Init(moveState);
+        stateMachine.ChangeState(moveState);
     }
+
 }

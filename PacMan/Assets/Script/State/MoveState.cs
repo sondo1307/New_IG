@@ -5,9 +5,10 @@ using UnityEngine;
 public class MoveState : State<Entity>
 {
     public float speed;
-    public MoveState(Entity entity, float speed) : base(entity)
+
+    public MoveState(Entity entity, float _speed) : base(entity)
     {
-        this.speed = speed;
+        this.speed = _speed;
     }
 
     public override void DoCkeck()
@@ -22,9 +23,7 @@ public class MoveState : State<Entity>
 
     public override void Exit()
     {
-
         base.Exit();
-
     }
 
     public override void LogicUpdate()
@@ -39,6 +38,6 @@ public class MoveState : State<Entity>
     }
     private void ABC()
     {
-
+        m_Enity.Move();
     }
 }
